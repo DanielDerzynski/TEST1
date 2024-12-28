@@ -1,6 +1,11 @@
 import streamlit as st
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+# Tytuł aplikacji
+st.title("Naciśnij przycisk")
+
+# Opis aplikacji
+st.write("Naciśnij przycisk, aby wyświetlić komunikat.")
+
+# Przycisk
+if st.button("Kliknij mnie!"):
+    st.success("Kocham Zuzie!")
