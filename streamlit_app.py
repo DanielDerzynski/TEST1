@@ -1,38 +1,41 @@
-import tkinter as tk
-from tkinter import ttk
+import streamlit as st
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+import numpy as np
+import datetime
 
-# Tworzenie aplikacji tkinter
-root = tk.Tk()
-root.title("Wykres w Tkinter")
+# Tytuł aplikacji
+st.title('Interaktywne rysowanie figur geometrycznych')
 
-# Funkcja do tworzenia wykresu
-def plot_graph():
-    # Tworzenie danych do wykresu
-    x = [1, 2, 3, 4, 5]
-    y = [1, 4, 9, 16, 25]
+# Dodajemy suwak do wyboru figury
+figure_choice = st.slider('Wybierz figurę: 1 - Trójkąt, 2 - Koło, 3 - Kwadrat', min_value=1, max_value=3, value=1)
 
-    # Tworzenie wykresu
-    fig, ax = plt.subplots()
-    ax.plot(x, y, label="Kwadrat", color="blue")
-    ax.set_title("Wykres funkcji kwadratowej")
-    ax.set_xlabel("x")
-    ax.set_ylabel("y")
-    ax.legend()
+# Dodajemy okienko tekstowe do wprowadzania tekstu
+text_input = st.text_input('Wpisz tekst do wyświetlenia w figurze:', '')
 
-    # Rysowanie wykresu w tkinterze
-    canvas = FigureCanvasTkAgg(fig, master=frame)
-    canvas.draw()
-    canvas.get_tk_widget().pack()
+# Pobieramy aktualny czas
+current_time = datetime.datetime.now().strftime('%H:%M:%S')
 
-# Tworzenie ramki w aplikacji tkinter
-frame = ttk.Frame(root)
-frame.pack(padx=10, pady=10)
+# Wyświetlamy godzinę w aplikacji
+st.write(f"Aktualna godzina: {current_time}")
 
-# Przycisk do rysowania wykresu
-btn_plot = ttk.Button(frame, text="Rysuj wykres", command=plot_graph)
-btn_plot.pack(pady=10)
+# Tworzymy wykres
+fig, ax = plt.subplots()
 
-# Uruchomienie głównej pętli aplikacji tkinter
-root.mainloop()
+# Ustawienia tła wykresu na niebieskie
+fig.patch.set_facecolor('skyblue')  # Kolor tła figury wykresu (obszaru)
+ax.set_facecolor('skyblue')  # Kolor tła samego obszaru wykresu
+
+# Ustawienia osi
+ax.set_xlim(-2, 2)
+ax.set_ylim(-2, 2)
+ax.set_aspect('equal')
+ax.axis('off')  # Ukrywamy osie
+
+# Rysowanie figury w zależności od wyboru suwaka
+if figure_choice == 1:  # Trójkąt
+    # Współrzędne wierzchołków trójkąta
+    triangle_x = [-1, 1, 0]
+    triangle_y = [-1, -1, 1]
+    ax.fill(triangle_x, triangle_y, color='blue', label='Trójkąt')
+    ax.plot(triangle_x + [triangle_x[0]], triangle_y + [triangle_y[0]], color='black')
+    # Wyświetlanie tekstu w 
