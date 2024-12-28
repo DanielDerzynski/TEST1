@@ -38,4 +38,22 @@ if figure_choice == 1:  # Trójkąt
     triangle_y = [-1, -1, 1]
     ax.fill(triangle_x, triangle_y, color='blue', label='Trójkąt')
     ax.plot(triangle_x + [triangle_x[0]], triangle_y + [triangle_y[0]], color='black')
-    # Wyświetlanie tekstu w 
+    # Wyświetlanie tekstu w środku trójkąta
+    ax.text(0, 0, text_input, color='white', ha='center', va='center', fontsize=12)
+elif figure_choice == 2:  # Koło
+    # Parametry koła
+    circle = plt.Circle((0, 0), 1, color='red', label='Koło', fill=True)
+    ax.add_artist(circle)
+    # Wyświetlanie tekstu w środku koła
+    ax.text(0, 0, text_input, color='white', ha='center', va='center', fontsize=12)
+elif figure_choice == 3:  # Kwadrat
+    # Współrzędne wierzchołków kwadratu
+    square_x = [-1, 1, 1, -1, -1]
+    square_y = [-1, -1, 1, 1, -1]
+    ax.fill(square_x, square_y, color='green', label='Kwadrat')
+    ax.plot(square_x, square_y, color='black')
+    # Wyświetlanie tekstu w środku kwadratu
+    ax.text(0, 0, text_input, color='white', ha='center', va='center', fontsize=12)
+
+# Wyświetlanie rysunku
+st.pyplot(fig)
